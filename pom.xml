@@ -4,11 +4,28 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.kuier</groupId>
-    <artifactId>aggregation-tool</artifactId>
-    <version>5.8.29</version>
-    <name>aggregation-tool</name>
+    <artifactId>AggregationTool</artifactId>
+    <version>${framework.version}</version>
+    <packaging>pom</packaging>
+    <name>AggregationTool</name>
+    <modules>
+        <module>ToolAll</module>
+        <module>ToolTest</module>
+    </modules>
     <properties>
+        <framework.version>5.8.29</framework.version>
         <java.version>17</java.version>
+        <junit.version>5.10.3</junit.version>
+        <lombok.version>1.18.30</lombok.version>
         <maven.compiler.source>17</maven.compiler.source>
     </properties>
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.junit.vintage/junit-vintage-engine -->
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 </project>
