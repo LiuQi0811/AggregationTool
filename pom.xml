@@ -11,6 +11,7 @@
     <modules>
         <module>ToolAll</module>
         <module>ToolTest</module>
+        <module>ToolLogger</module>
     </modules>
     <properties>
         <framework.version>5.8.29</framework.version>

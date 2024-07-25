@@ -1,4 +1,4 @@
-package com.kuier;
+package com.kuier.tool.test;
 
 /**
  * Hello world!
