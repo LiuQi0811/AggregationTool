@@ -12,6 +12,7 @@
         <module>ToolAll</module>
         <module>ToolTest</module>
         <module>ToolLogger</module>
+        <module>ToolCore</module>
     </modules>
     <properties>
         <framework.version>5.8.29</framework.version>
@@ -31,6 +32,11 @@
     </dependencies>
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.kuier</groupId>
+                <artifactId>ToolCore</artifactId>
+                <version>${framework.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.kuier</groupId>
                 <artifactId>ToolLogger</artifactId>
