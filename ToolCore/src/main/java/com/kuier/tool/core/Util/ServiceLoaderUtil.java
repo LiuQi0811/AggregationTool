@@ -1,6 +1,7 @@
 package com.kuier.tool.core.Util;
 
 import java.util.Iterator;
+import java.util.ServiceConfigurationError;
 import java.util.ServiceLoader;
 
 /**
@@ -17,12 +18,16 @@ public class ServiceLoaderUtil {
      *
      * @param clazz
      * @param <T>
-     * @return
+     * @return {@link T}
      */
     public static <T> T loadFirstAvailable(Class<T> clazz) {
         Iterator<T> iterator = loader(clazz).iterator();
-        while (iterator.hasNext()){
-            System.out.println("  ServiceLoaderUtil 服务加载工具类 " + iterator.next());
+        while (iterator.hasNext()) {
+            try {
+                return iterator.next();
+            } catch (ServiceConfigurationError e) {
+                e.printStackTrace();
+            }
         }
         return null;
     }
@@ -31,7 +36,7 @@ public class ServiceLoaderUtil {
      * load 加载服务
      *
      * @param <T>
-     * @return
+     * @return {@link ServiceLoader<T>}
      * @author LiuQi
      */
     public static <T> ServiceLoader<T> loader(Class<T> clazz) {
@@ -44,10 +49,11 @@ public class ServiceLoaderUtil {
      * @param clazz
      * @param loader
      * @param <T>
-     * @return
+     * @return {@link ServiceLoader<T>}
      * @author LiuQi
      */
     public static <T> ServiceLoader<T> loader(Class<T> clazz, ClassLoader loader) {
-        return ServiceLoader.load(clazz, loader);
+        // 类加载为空 默认加载当前类的类加载器
+        return ServiceLoader.load(clazz, ObjUtil.defaultIfNull(loader, ClassLoaderUtil::getClassLoader));
     }
 }

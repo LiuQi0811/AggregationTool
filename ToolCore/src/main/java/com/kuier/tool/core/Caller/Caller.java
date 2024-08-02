@@ -9,17 +9,17 @@ package com.kuier.tool.core.Caller;
  */
 public interface Caller {
     /**
-     * callerCallerInstance 获取调用者的调用者
+     * getCallerCaller 获取调用者的调用者
      *
      * @return
      * @author LiuQi
      */
-    Class<?> callerCallerInstance();
+    Class<?> getCallerCaller();
 
     /**
      * callerInstance 获取调用者
      * @return
      * @author LiuQi
      */
-    Class<?> callerInstance();
+    Class<?> getCaller();
 }

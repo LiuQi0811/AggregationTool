@@ -7,14 +7,14 @@ package com.kuier.tool.core.Caller;
  * @Date 2024/7/29 10:06
  * @Version 1.0
  */
-public class StackTraceCaller implements Caller{
+public class StackTraceCaller implements Caller {
     @Override
-    public Class<?> callerCallerInstance() {
+    public Class<?> getCallerCaller() {
         return null;
     }
 
     @Override
-    public Class<?> callerInstance() {
+    public Class<?> getCaller() {
         return null;
     }
 }

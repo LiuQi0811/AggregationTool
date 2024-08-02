@@ -24,7 +24,7 @@ public class CallerHandler {
      * @author LiuQi
      */
     public static Class<?> callerCallerInstance() {
-        return INSTANCE.callerCallerInstance();
+        return INSTANCE.getCallerCaller();
     }
 
     /**
@@ -39,7 +39,7 @@ public class CallerHandler {
         try {
             caller = new SecurityManagerCaller();
             //  验证调用者接口实例是否创建成功
-            if (null != caller.callerCallerInstance() && null != caller.callerInstance()) {// 调用者接口实例创建成功
+            if (null != caller.getCallerCaller() && null != caller.getCaller()) {// 调用者接口实例创建成功
                 return caller;
             }
         } catch (Throwable e) {

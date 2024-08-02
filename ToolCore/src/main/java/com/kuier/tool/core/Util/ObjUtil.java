@@ -9,7 +9,7 @@ import java.util.function.Supplier;
  * @Date 2024/7/29 14:22
  * @Version 1.0
  */
-public class ObjectUtil {
+public class ObjUtil {
 
     /**
      * defaultIfNull 参数为空默认值
@@ -17,7 +17,7 @@ public class ObjectUtil {
      * @param param
      * @param defaultValueSupplier
      * @param <T>
-     * @return
+     * @return {@link T}
      * @author LiuQi
      */
     public static <T> T defaultIfNull(T param, Supplier<? extends T> defaultValueSupplier) {
@@ -33,7 +33,7 @@ public class ObjectUtil {
      * isNull 参数是否为空
      *
      * @param param
-     * @return
+     * @return {@link  Boolean}
      * @author LiuQi
      */
     public static Boolean isNull(Object param) {

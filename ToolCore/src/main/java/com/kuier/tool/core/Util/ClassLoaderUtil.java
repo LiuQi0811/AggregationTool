@@ -15,7 +15,7 @@ public class ClassLoaderUtil {
     /**
      * getClassLoader 获取类加载器
      *
-     * @return
+     * @return {@link ClassLoader}
      * @author LiuQi
      */
     public static ClassLoader getClassLoader() {
@@ -36,7 +36,7 @@ public class ClassLoaderUtil {
     /**
      * getContextClassLoader 获取上下文环境类加载器
      *
-     * @return
+     * @return {@link ClassLoader}
      * @author LiuQi
      */
     public static ClassLoader getContextClassLoader() {
@@ -52,7 +52,7 @@ public class ClassLoaderUtil {
     /**
      * getSystemClassLoader 获取系统类加载器
      *
-     * @return
+     * @return {@link ClassLoader}
      * @author LiuQi
      */
     public static ClassLoader getSystemClassLoader() {

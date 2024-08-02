@@ -14,7 +14,7 @@ public class SecurityManagerCaller extends SecurityManager implements Caller, Se
     private static final int OFFSET = 1;
 
     @Override
-    public Class<?> callerCallerInstance() {
+    public Class<?> getCallerCaller() {
         Class<?>[] context = getClassContext();
         if (null != context && (OFFSET + 2) < context.length) {
             return context[OFFSET + 2];
@@ -23,7 +23,7 @@ public class SecurityManagerCaller extends SecurityManager implements Caller, Se
     }
 
     @Override
-    public Class<?> callerInstance() {
+    public Class<?> getCaller() {
         Class<?>[] context = getClassContext();
         if (null != context && (OFFSET + 1) < context.length) {
             return context[OFFSET + 1];
