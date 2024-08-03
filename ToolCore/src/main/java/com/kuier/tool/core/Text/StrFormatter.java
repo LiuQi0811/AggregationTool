@@ -53,14 +53,32 @@ public class StrFormatter {
             // 获取占位符所在位置
             delimIndex = patternStr.indexOf(placeHolder, handledPosition);
             if (delimIndex == -1) { // 占位符不存在
-                // TODO
+                if (handledPosition == 0) { // 处理到的位置为0
+                    // 返回匹配字符串
+                    return patternStr;
+                }
+                // 拼接剩余部分
+                builder.append(patternStr, handledPosition, patternStrLen);
+                return builder.toString();
             }
             if (delimIndex > 0 && patternStr.charAt(delimIndex - 1) == StrUtil.C_BACKSLASH) { // 转义符
-                // TODO
+                if (delimIndex > 1 && patternStr.charAt(delimIndex - 2) == StrUtil.C_BACKSLASH) { // 双转义符
+                    // 转义符之前还有一个转义符 占位符依旧有效
+                    builder.append(patternStr, handledPosition, delimIndex - 1);
+                    builder.append(StrUtil.utf8Str(params[i]));
+                    handledPosition = delimIndex + placeHolderLen;
+                } else {
+                    // 转义符前一个字符
+                    i--;
+                    builder.append(patternStr, handledPosition, delimIndex - 1);
+                    builder.append(placeHolder.charAt(0));
+                    // 更新处理到的位置
+                    handledPosition = delimIndex + 1;
+                }
             } else { // 占位符
                 builder.append(patternStr, handledPosition, delimIndex);
                 // 数据拼接
-                builder.append(params[i]);
+                builder.append(StrUtil.utf8Str(params[i]));
                 // 更新处理到的位置
                 handledPosition = delimIndex + placeHolderLen;
             }

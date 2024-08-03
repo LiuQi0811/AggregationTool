@@ -2,6 +2,9 @@ package com.kuier.tool.core.Util;
 
 import com.kuier.tool.core.Text.StrFormatter;
 
+import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
+
 /**
  * @ClassName CharSequenceUtil
  * @Description CharSequenceUtil 字符工具类
@@ -108,5 +111,45 @@ public class CharSequenceUtil {
         }
         // 返回格式化字符串
         return StrFormatter.format(template.toString(), params);
+    }
+
+    /**
+     * utf8Str 字符串utf8编码处理
+     *
+     * @param data
+     * @return {@link String}
+     * @author LiuQi
+     */
+    public static String utf8Str(Object data) {
+        // 对象转字符串处理
+        return str(data, CharsetUtil.CHARSET_UTF_8);
+    }
+
+    /**
+     * str 对象转字符串处理
+     *
+     * @param data
+     * @param charset
+     * @return {@link String}
+     * @author LiuQi
+     */
+    public static String str(Object data, Charset charset) {
+        if (null == data) { // 参数对象为空
+            // 返回null
+            return null;
+        }
+        // 类型转换
+        if (data instanceof String) { // 参数对象类型是字符串
+            // 返回字符串
+            return ((String) data);
+        } else if (data instanceof byte[]) { // 参数对象类型是字节数组
+            //TODO
+        } else if (data instanceof Byte[]) { // 参数对象类型是字节包装数组
+            //TODO
+        } else if (data instanceof ByteBuffer) { // 参数对象类型是ByteBuffer 字节缓冲区
+            //TODO
+        }
+        // 返回字符串
+        return data.toString();
     }
 }
