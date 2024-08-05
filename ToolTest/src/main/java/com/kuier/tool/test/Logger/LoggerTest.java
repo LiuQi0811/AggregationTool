@@ -21,7 +21,7 @@ public class LoggerTest extends TestCase {
     @Test
     public void testLog() {
         System.out.println(" ...... .. LoggerTest 单元测试 开始 ........");
-        Logger logger = LoggerFactory.instance();
-        System.out.println(" ..... " + logger);
+        Logger logger = LoggerFactory.get();
+        System.out.println(" ..... Back  <-  " + logger);
     }
 }

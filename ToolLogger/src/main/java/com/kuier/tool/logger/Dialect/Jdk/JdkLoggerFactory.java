@@ -1,7 +1,10 @@
 package com.kuier.tool.logger.Dialect.Jdk;
 
+import com.kuier.tool.core.Util.ResourceUtil;
 import com.kuier.tool.logger.Logger;
 import com.kuier.tool.logger.LoggerFactory;
+
+import java.io.InputStream;
 
 /**
  * @ClassName JdkLoggerFactory
@@ -34,6 +37,7 @@ public class JdkLoggerFactory extends LoggerFactory {
      */
     private void readConfig() {
         System.out.println("读取配置文件 ");
+        InputStream streamSafe = ResourceUtil.getStreamSafe("logger.properties");
         try {
 
         } catch (Exception e) {
