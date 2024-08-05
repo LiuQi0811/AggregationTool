@@ -4,6 +4,7 @@ import com.kuier.tool.core.Text.StrFormatter;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
+import java.util.function.Predicate;
 
 /**
  * @ClassName CharSequenceUtil
@@ -202,6 +203,23 @@ public class CharSequenceUtil {
     }
 
     /**
+     * startWith 是否以指定字符开头处理
+     *
+     * @param charStr
+     * @param char_
+     * @return {@link Boolean}
+     * @author LiuQi
+     */
+    public static Boolean startWith(CharSequence charStr, char char_) {
+        if (isEmpty(charStr)) { // 字符串参数为空
+            // 返回 false
+            return false;
+        }
+        // 返回字符参数 与字符串参数的第一个字符对比
+        return char_ == charStr.charAt(0);
+    }
+
+    /**
      * startWith 是否以指定字符串开头处理（含是否忽略字符串大小写）
      *
      * @param charStr
@@ -340,5 +358,73 @@ public class CharSequenceUtil {
         return charStr.toString().substring(fromIndexInclude, toIndexExclude);
     }
 
+    /**
+     * trimStart 开头空白符处理
+     *
+     * @param charStr
+     * @return {@link String}
+     * @author LiuQi
+     */
+    public static String trimStart(CharSequence charStr) {
+        // 空白符/空格处理
+        return trim(charStr, -1);
+    }
 
+    /**
+     * trim 空白符/空格处理
+     *
+     * @param charStr
+     * @param mode
+     * @return {@link String}
+     * @author LiuQi
+     */
+    public static String trim(CharSequence charStr, int mode) {
+        // 空白符/空格处理（含断言是否过滤字符）
+        return trim(charStr, mode, CharUtil::isBlankChar);
+    }
+
+    /**
+     * trim 空白符/空格处理（含断言是否过滤字符）
+     *
+     * @param charStr
+     * @param mode
+     * @param predicate
+     * @return {@link String}
+     * @author LiuQi
+     */
+    public static String trim(CharSequence charStr, int mode, Predicate<Character> predicate) {
+        // 字符串处理结果变量
+        String resultStr;
+        if (null == charStr) { // 参数字符串为空
+            // 返回空字符
+            resultStr = null;
+        } else { // 参数字符串不为空
+            // 获取字符串长度
+            int strLen = charStr.length();
+            // 开始索引
+            int start = 0;
+            // 结束索引
+            int end = strLen;
+            // mode  -1 表示trimStart  0 表示trim全部 1 表示trimEnd
+            if (mode <= 0) { // trimStart trim全部
+                while ((start < end) && predicate.test(charStr.charAt(start))) { // 开始索引 < 结束索引 并且过滤断言字符
+                    // 开始索引累加
+                    start++;
+                }
+            }
+            if (mode >= 0) { // trimEnd trim全部
+                // TODO
+                System.out.println("  1 表示trimEnd ");
+            }
+            if ((start > 0) || (end < strLen)) { // 开始索引 > 0 或者 结束索引 < 字符串长度
+                // 截取字符串处理
+                resultStr = charStr.toString().substring(start, end);
+            } else {
+                // 转字符串处理
+                resultStr = charStr.toString();
+            }
+        }
+        // 返回字符串处理结果
+        return resultStr;
+    }
 }
