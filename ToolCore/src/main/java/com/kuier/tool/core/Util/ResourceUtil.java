@@ -45,10 +45,12 @@ public class ResourceUtil {
     /**
      * ClassPath资源中获取stream流
      *
-     * @return
+     * @return {@link InputStream}
      * @author LiuQi
      */
-    public static InputStream getStreamSafe() {
+    public static InputStream getStreamSafe(String resource) {
+        // 获取资源文件对应的Resource对象
+        getResourceObj(resource);
         return null;
     }
 
@@ -61,7 +63,9 @@ public class ResourceUtil {
      */
     public static Resource getResourceObj(String path) {
         if (StrUtil.isNotBlank(path)) { // 路径不为空
-
+            if (path.startsWith(UrlUtil.FILE_URL_PREFIX) || FileUtil.isAbsolutePath(path)) { // 匹配的绝对路径
+                // TODO
+            }
         }
         // 返回ClassPath单一资源访问类对象
         return new ClassPathResource(path);
