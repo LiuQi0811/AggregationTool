@@ -89,6 +89,7 @@ public class CharSequenceUtil {
      * @author LiuQi
      */
     public static Boolean isEmpty(CharSequence charStr) {
+        // 字符为空 或者字符长度等于0 返回true
         return charStr == null || charStr.length() == 0;
     }
 
@@ -126,6 +127,17 @@ public class CharSequenceUtil {
     }
 
     /**
+     * str CharSequence 转字符串处理
+     *
+     * @param charStr
+     * @return
+     * @author LiuQi
+     */
+    public static String str(CharSequence charStr) {
+        return null == charStr ? null : charStr.toString();
+    }
+
+    /**
      * str 对象转字符串处理
      *
      * @param data
@@ -152,4 +164,181 @@ public class CharSequenceUtil {
         // 返回字符串
         return data.toString();
     }
+
+    /**
+     * removePrefixIgnoreCase 移除字符串前缀处理（不区分大小写）
+     *
+     * @param charStr
+     * @param prefix
+     * @return {@link String}
+     * @author LiuQi
+     */
+    public static String removePrefixIgnoreCase(CharSequence charStr, CharSequence prefix) {
+        if (isEmpty(charStr) || isEmpty(prefix)) { //参数为空
+            // CharSequence 转字符串处理 返回字符串
+            return str(charStr);
+        }
+        // 参数转字符串
+        String charStr_ = charStr.toString();
+        if (startWithIgnoreCase(charStr, prefix)) { // 以指定字符串开头（不区分大小写）
+            // 字符串截取 指定字符后面的部分
+            return subSuf(charStr, prefix.length());
+        }
+        // 返回处理后的字符串
+        return charStr_;
+    }
+
+    /**
+     * startWithIgnoreCase 是否以指定字符串开头处理（不区分大小写）
+     *
+     * @param charStr
+     * @param prefix
+     * @return {@link Boolean}
+     * @author LiuQi
+     */
+    public static Boolean startWithIgnoreCase(CharSequence charStr, CharSequence prefix) {
+        // 返回 是否以指定字符串开头（含是否忽略字符串大小写）
+        return startWith(charStr, prefix, true);
+    }
+
+    /**
+     * startWith 是否以指定字符串开头处理（含是否忽略字符串大小写）
+     *
+     * @param charStr
+     * @param prefix
+     * @param ignoreCase
+     * @return {@link Boolean}
+     * @author LiuQi
+     */
+    public static Boolean startWith(CharSequence charStr, CharSequence prefix, boolean ignoreCase) {
+        // 返回 是否以指定字符串开头（含是否忽略字符串大小写 字符串相等）
+        return startWith(charStr, prefix, ignoreCase, false);
+    }
+
+    /**
+     * startWith 是否以指定字符串开头处理（含是否忽略字符串大小写 字符串相等）
+     *
+     * @param charStr
+     * @param prefix
+     * @param ignoreCase
+     * @param ignoreEquals
+     * @return {@link Boolean}
+     * @author LiuQi
+     */
+    public static Boolean startWith(CharSequence charStr, CharSequence prefix, boolean ignoreCase, boolean ignoreEquals) {
+        if (null == charStr || null == prefix) {// 字符串 或者字符串开头 为空
+            if (ignoreEquals) { // 不忽略字符串相等情况
+                // 返回 false
+                return false;
+            }
+            // 字符串 或者字符串开头 都为空返回
+            return null == charStr && null == prefix;
+        }
+        // 参数转字符串 并匹配规则
+        boolean isStartWith = charStr.toString().regionMatches(ignoreCase, 0, prefix.toString(), 0, prefix.length());
+        if (isStartWith) { // 字符串开头匹配
+            return (false == ignoreEquals) || (false == equals(charStr, prefix, ignoreCase));
+        }
+        return false;
+    }
+
+    /**
+     * equals 字符串是否相等初处理（含是否忽略字符串大小写）
+     *
+     * @param charStr
+     * @param charStr_
+     * @param ignoreCase
+     * @return {@link Boolean}
+     * @author LiuQi
+     */
+    public static Boolean equals(CharSequence charStr, CharSequence charStr_, boolean ignoreCase) {
+        if (null == charStr) { // 第一个字符串参数为空
+            // 第二个字符串参数为空 返回 true
+            return charStr_ == null;
+        }
+        if (null == charStr_) {// 第二个字符串参数为空
+            // 返回 false
+            return false;
+        }
+        if (ignoreCase) { // 忽略大小写
+            // 返回对比后结果
+            return charStr.toString().equalsIgnoreCase(charStr_.toString());
+        } else { // 内容比较
+            // 返回对比后结果
+            return charStr.toString().contentEquals(charStr_.toString());
+        }
+    }
+
+    /**
+     * subSuf 截取指定位置后面的字符串处理
+     *
+     * @param charStr
+     * @param fromIndex
+     * @return {@link String}
+     * @author LiuQi
+     */
+    public static String subSuf(CharSequence charStr, int fromIndex) {
+        if (isEmpty(charStr)) { // 字符串为空
+            // 返回null
+            return null;
+        }
+        // 字符串截取处理
+        return sub(charStr, fromIndex, charStr.length());
+    }
+
+    /**
+     * sub 字符串截取处理
+     *
+     * @param charStr
+     * @param fromIndexInclude
+     * @param toIndexExclude
+     * @return {@link String}
+     * @author LiuQi
+     */
+    public static String sub(CharSequence charStr, int fromIndexInclude, int toIndexExclude) {
+        if (isEmpty(charStr)) { // 字符串为空
+            // CharSequence 转字符串处理 返回字符串
+            return str(charStr);
+        }
+        // 字符串长度
+        int strLen = charStr.length();
+        if (fromIndexInclude < 0) { // 开始的索引（包括）起始位置小于0
+            // 更新开始的索引 字符串长度+ 开始索引
+            fromIndexInclude = strLen + fromIndexInclude;
+            if (fromIndexInclude < 0) { // 更新后开始的索引（包括）起始位置小于0
+                // 更新开始的索引 0
+                fromIndexInclude = 0;
+            }
+        } else if (fromIndexInclude > strLen) { // 开始的索引（包括）起始位置大于字符串长度
+            // 更新开始的索引 字符串长度
+            fromIndexInclude = strLen;
+        }
+        if (toIndexExclude < 0) { // 结束的索引（包括）起始位置小于0
+            // 更新结束的索引 字符串长度+ 结束索引
+            toIndexExclude = strLen + toIndexExclude;
+            if (toIndexExclude < 0) { // 更新后结束的索引（包括）起始位置小于0
+                // 更新结束的索引 0
+                toIndexExclude = 0;
+            }
+        } else if (toIndexExclude > strLen) { // 结束的索引（包括）起始位置大于字符串长度
+            // 更新结束的索引 字符串长度
+            toIndexExclude = strLen;
+        }
+        if (toIndexExclude < fromIndexInclude) { // 结束的索引（包括）起始位置 < 开始的索引（包括）起始位置
+            // 临时索引
+            int tempIndex_ = fromIndexInclude;
+            // 更新开始的索引 结束的索引（包括）起始位置
+            fromIndexInclude = toIndexExclude;
+            // 更新结束的索引 临时索引
+            toIndexExclude = tempIndex_;
+        }
+        if (fromIndexInclude == toIndexExclude) { // 开始的索引（包括）起始位置  = 结束的索引（包括）起始位置
+            // 返回空字符串
+            return EMPTY;
+        }
+        // 返回 字符串截取 字符串
+        return charStr.toString().substring(fromIndexInclude, toIndexExclude);
+    }
+
+
 }
