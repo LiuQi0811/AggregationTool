@@ -95,6 +95,25 @@ public class CharSequenceUtil {
     }
 
     /**
+     * isEmptyIfStr 字符串为空处理
+     *
+     * @param data
+     * @return {@link Boolean}
+     * @author LiuQi
+     */
+    public static Boolean isEmptyIfStr(Object data) {
+        if (null == data) { // 参数为空
+            // 返回 true
+            return true;
+        } else if (data instanceof CharSequence) { // 参数类型为CharSequence 字符类型
+            // 参数字符串长度为0 返回 true
+            return 0 == ((CharSequence) data).length();
+        }
+        // 返回 false
+        return false;
+    }
+
+    /**
      * format 字符串格式化处理
      *
      * @param template
@@ -374,6 +393,18 @@ public class CharSequenceUtil {
      * trim 空白符/空格处理
      *
      * @param charStr
+     * @return {@link String}
+     * @author LiuQi
+     */
+    public static String trim(CharSequence charStr) {
+        // 字符串参数为空 直接返回null 则空白符/空格处理
+        return (null == charStr) ? null : trim(charStr, 0);
+    }
+
+    /**
+     * trim 空白符/空格处理
+     *
+     * @param charStr
      * @param mode
      * @return {@link String}
      * @author LiuQi
@@ -408,13 +439,15 @@ public class CharSequenceUtil {
             // mode  -1 表示trimStart  0 表示trim全部 1 表示trimEnd
             if (mode <= 0) { // trimStart trim全部
                 while ((start < end) && predicate.test(charStr.charAt(start))) { // 开始索引 < 结束索引 并且过滤断言字符
-                    // 开始索引累加
+                    // 开始索引递增
                     start++;
                 }
             }
             if (mode >= 0) { // trimEnd trim全部
-                // TODO
-                System.out.println("  1 表示trimEnd ");
+                while ((start < end) && (predicate.test(charStr.charAt(end - 1)))) {// 开始索引 < 结束索引 并且过滤断言字符
+                    // 结束索引递减
+                    end--;
+                }
             }
             if ((start > 0) || (end < strLen)) { // 开始索引 > 0 或者 结束索引 < 字符串长度
                 // 截取字符串处理
