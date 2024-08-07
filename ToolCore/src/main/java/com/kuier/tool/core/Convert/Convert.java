@@ -34,4 +34,27 @@ public class Convert {
 
         return null;
     }
+
+    static class F {
+        String name;
+        String address;
+
+        F(String name, String address) {
+            this.name = name;
+            this.address = address;
+        }
+    }
+
+    static class K {
+        String name;
+        String address;
+
+        K() {
+
+        }
+    }
+
+    public static void main(String[] args) {
+        convertWithCheck(F.class, new F("江小白", "北京-东城区"), new K(), true);
+    }
 }
