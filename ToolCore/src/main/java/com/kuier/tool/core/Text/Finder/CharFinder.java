@@ -31,7 +31,9 @@ public class CharFinder extends TextFinder {
      * @author LiuQi
      */
     public CharFinder(char char_, boolean ignoreCase) {
+        // 设置字符
         this.char_ = char_;
+        // 设置是否忽略大小写
         this.caseInsensitive = ignoreCase;
     }
 
@@ -43,13 +45,14 @@ public class CharFinder extends TextFinder {
         if (negative) { // 反向查找
             System.out.println("反向查找");
         } else { // 非反向查找
-            System.out.println("非反向查找");
             for (int i = index_; i < limit; i++) {
-                if (NumberUtil.equals(char_, text.charAt(i), caseInsensitive)) {
+                if (NumberUtil.equals(char_, text.charAt(i), caseInsensitive)) { // 字符相同处理
+                    // 返回字符索引
                     return i;
                 }
             }
         }
+        // 返回 -1
         return -1;
     }
 

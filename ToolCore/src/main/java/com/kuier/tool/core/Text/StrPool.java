@@ -32,4 +32,14 @@ public interface StrPool {
      * 字符串常量：冒号
      */
     String COLON = ":";
+
+    /**
+     * 字符串常量：点
+     */
+    String DOT = ".";
+
+    /**
+     * 字符串常量：双点
+     */
+    String DOUBLE_DOT = "..";
 }

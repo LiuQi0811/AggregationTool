@@ -1,5 +1,6 @@
 package com.kuier.tool.core.Util;
 
+import java.util.Map;
 import java.util.function.Supplier;
 
 /**
@@ -39,5 +40,24 @@ public class ObjUtil {
     public static Boolean isNull(Object param) {
         // 为空返回 true 否则返回 false
         return null == param || param.equals(null);
+    }
+
+    /**
+     * toString 对象转字符串
+     *
+     * @param data
+     * @return
+     */
+    public static String toString(Object data) {
+        if (null == data) { // 对象参数为空
+            // 返回 null字符串
+            return StrUtil.NULL;
+        }
+        if (data instanceof Map) { // 对象参数类型为Map
+            // 返回 Map 转字符串
+            return data.toString();
+        }
+        // 返回对象转字符串
+        return null;
     }
 }
