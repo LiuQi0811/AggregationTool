@@ -1,5 +1,7 @@
 package com.kuier.tool.core.Util;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -82,14 +84,42 @@ public class FileUtil {
                 // 前缀置空字符
                 prefix = StrUtil.EMPTY;
             }
-
         }
         if (pathToUse.startsWith(StrUtil.SLASH)) { // 路径以 / 开头
             // TODO
             System.out.println(" 路径以 / 开头 ___ ___");
         }
-        //TODO
-        return null;
+        // 路径列表
+        List<String> pathList = StrUtil.split(pathToUse, StrUtil.C_SLASH);
+        // 路径元素列表
+        List<String> pathElementList = new LinkedList<>();
+        // 路径元素
+        String element;
+        // 上级路径数量
+        int tops = 0;
+        for (int i = pathList.size() - 1; i >= 0; i--) { // 路径列表遍历
+            // 路径元素赋值
+            element = pathList.get(i);
+            if (false == StrUtil.DOT.equals(element)) { // 路径元素 非.
+                if (StrUtil.DOUBLE_DOT.equals(element)) { // 路径元素 是..
+                    // 上级路径数量递增
+                    tops++;
+                } else {
+                    if (tops > 0) { // 上级路径数量大于0
+                        // 上级路径数量递减
+                        tops--;
+                    } else {
+                        // 路径元素列表数据追加
+                        pathElementList.add(0, element);
+                    }
+                }
+            }
+        }
+        if (tops > 0 && StrUtil.isEmpty(prefix)) { // 上级路径数量大于0 且 前缀为空
+            //TODO 上级路径数量大于0 且 前缀为空  逻辑待补充
+            System.out.println(" 上级路径数量大于0 且 前缀为空 ___ ___");
+        }
+        return prefix + CollUtil.join(pathElementList, StrUtil.SLASH);
     }
 
     /**
