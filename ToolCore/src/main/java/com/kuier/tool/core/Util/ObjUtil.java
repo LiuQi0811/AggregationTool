@@ -15,31 +15,31 @@ public class ObjUtil {
     /**
      * defaultIfNull 参数为空默认值
      *
-     * @param param
+     * @param value
      * @param defaultValueSupplier
      * @param <T>
      * @return {@link T}
      * @author LiuQi
      */
-    public static <T> T defaultIfNull(T param, Supplier<? extends T> defaultValueSupplier) {
+    public static <T> T defaultIfNull(T value, Supplier<? extends T> defaultValueSupplier) {
         // 参数是否为空
-        if (isNull(param)) {// 参数为空时返回默认值
+        if (isNull(value)) {// 参数为空时返回默认值
             return defaultValueSupplier.get();
         }
         // 参数不为空时返回参数
-        return param;
+        return value;
     }
 
     /**
      * isNull 参数是否为空
      *
-     * @param param
+     * @param data
      * @return {@link  Boolean}
      * @author LiuQi
      */
-    public static Boolean isNull(Object param) {
+    public static Boolean isNull(Object data) {
         // 为空返回 true 否则返回 false
-        return null == param || param.equals(null);
+        return null == data || data.equals(null);
     }
 
     /**
