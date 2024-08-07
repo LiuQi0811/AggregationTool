@@ -48,16 +48,16 @@ public abstract class TextFinder implements Finder, Serializable {
         if (negative && -1 == endIndex) { // 反向查找模式下 -1表示0前面的位置 即字符串反向末尾的位置
             return -1;
         }
-        // 分页数量
+        // 分片数量
         final int limit;
         if (endIndex < 0) { // 结束查找的索引 < 0
-            // 更新分页数量 结束查找的索引 + 文本长度 + 1
+            // 更新分片数量 结束查找的索引 + 文本长度 + 1
             limit = endIndex + text.length() + 1;
         } else {
-            // 更新分页数量 结束查找的索引 文本长度 最小值
+            // 更新分片数量 结束查找的索引 文本长度 最小值
             limit = Math.min(endIndex, text.length());
         }
-        // 返回分页数量
+        // 返回分片数量
         return limit;
     }
 }

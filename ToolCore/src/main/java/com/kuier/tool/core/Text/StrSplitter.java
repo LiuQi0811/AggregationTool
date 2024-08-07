@@ -17,7 +17,40 @@ import java.util.function.Function;
 public class StrSplitter {
 
     /**
-     * split 字符串分割
+     * split 字符串分割处理
+     *
+     * @param charStr
+     * @param separator
+     * @param limit
+     * @param isTrim
+     * @param ignoreEmpty
+     * @return {@link List<String>}
+     * @author LiuQi
+     */
+    public static List<String> split(CharSequence charStr, char separator, int limit, boolean isTrim, boolean ignoreEmpty) {
+        // 返回split 字符串分割 非空
+        return split(charStr, separator, limit, isTrim, ignoreEmpty, false);
+    }
+
+    /**
+     * split 字符串分割处理
+     *
+     * @param charStr
+     * @param separator
+     * @param limit
+     * @param isTrim
+     * @param ignoreEmpty
+     * @param ignoreCase
+     * @return {@link List<String>}
+     * @author LiuQi
+     */
+    public static List<String> split(CharSequence charStr, char separator, int limit, boolean isTrim, boolean ignoreEmpty, boolean ignoreCase) {
+        // 返回split 字符串分割
+        return split(charStr, separator, limit, ignoreEmpty, ignoreCase, trimFunc(isTrim));
+    }
+
+    /**
+     * split 字符串分割处理
      *
      * @param charStr
      * @param separator
@@ -43,7 +76,7 @@ public class StrSplitter {
     }
 
     /**
-     * trimFunc 空白字符串/空格函数
+     * trimFunc 空白字符串/空格函数处理
      *
      * @param isTrim
      * @return {@link Function<String,String>}
@@ -52,10 +85,5 @@ public class StrSplitter {
     private static Function<String, String> trimFunc(boolean isTrim) {
         // isTrim = true 返回空白字符串/空格函数处理后的字符串 isTrim = false 返回原字符串
         return (str) -> isTrim ? StrUtil.trim(str) : str;
-    }
-
-    public static void main(String[] args) {
-        List<String> split = split("海内存知己，天涯若比邻", '，', 0, true, false, trimFunc(true));
-        System.out.println(split);
     }
 }

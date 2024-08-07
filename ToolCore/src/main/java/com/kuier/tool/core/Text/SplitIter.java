@@ -31,7 +31,7 @@ public class SplitIter extends ComputeIter<String> implements Serializable {
     private final TextFinder finder;
 
     /**
-     * 分页数
+     * 分片数
      */
     private final int limit;
 
@@ -101,12 +101,12 @@ public class SplitIter extends ComputeIter<String> implements Serializable {
     @Override
     protected String computeNext() {
         //  达到数量上限或末尾 结束
-        if ((count >= limit) || (offset > text.length())) { // 计数器数量 >= 分页数量 或者 偏移量 > 文本长度
+        if ((count >= limit) || (offset > text.length())) { // 计数器数量 >= 分片数量 或者 偏移量 > 文本长度
             // 返回 null
             return null;
         }
         // 达到数量上限
-        if (count == (limit - 1)) { // 计数器数量 = 分页数量 - 1 表示达到数量上限
+        if (count == (limit - 1)) { // 计数器数量 = 分片数量 - 1 表示达到数量上限
             if (ignoreEmpty && offset == text.length()) {
                 // 最后一个是空字符串 返回 null
                 return null;

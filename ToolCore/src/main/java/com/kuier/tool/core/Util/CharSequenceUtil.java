@@ -1,9 +1,11 @@
 package com.kuier.tool.core.Util;
 
 import com.kuier.tool.core.Text.StrFormatter;
+import com.kuier.tool.core.Text.StrSplitter;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
+import java.util.List;
 import java.util.function.Predicate;
 
 /**
@@ -459,5 +461,48 @@ public class CharSequenceUtil {
         }
         // 返回字符串处理结果
         return resultStr;
+    }
+
+    /**
+     * split 字符串分割（含默认分片）
+     *
+     * @param charStr
+     * @param separator
+     * @return {@link List<String>}
+     * @author LiuQi
+     */
+    public static List<String> split(CharSequence charStr, char separator) {
+        // 返回 字符串分割（含 非空白 非空处理）
+        return split(charStr, separator, 0);
+    }
+
+    /**
+     * split 字符串分割（含 非空白 非空处理）
+     *
+     * @param charStr
+     * @param separator
+     * @param limit
+     * @return {@link List<String>}
+     * @author LiuQi
+     */
+    public static List<String> split(CharSequence charStr, char separator, int limit) {
+        // 返回字符串分割
+        return split(charStr, separator, limit, false, false);
+    }
+
+    /**
+     * split 字符串分割
+     *
+     * @param charStr
+     * @param separator
+     * @param limit
+     * @param isTrim
+     * @param ignoreEmpty
+     * @return {@link List<String>}
+     * @author LiuQi
+     */
+    public static List<String> split(CharSequence charStr, char separator, int limit, boolean isTrim, boolean ignoreEmpty) {
+        // 返回字符串分割
+        return StrSplitter.split(charStr, separator, limit, isTrim, ignoreEmpty);
     }
 }
