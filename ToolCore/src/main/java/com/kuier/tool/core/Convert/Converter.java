@@ -8,4 +8,13 @@ package com.kuier.tool.core.Convert;
  * @Version 1.0
  */
 public interface Converter<T> {
+    /**
+     * convert 转换为指定类型
+     *
+     * @param value
+     * @param defaultValue
+     * @return {@link T}
+     * @throws IllegalArgumentException
+     */
+    T convert(Object value, T defaultValue) throws IllegalArgumentException;
 }
