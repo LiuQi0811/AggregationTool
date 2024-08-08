@@ -1,6 +1,7 @@
 package com.kuier.tool.core.Text;
 
 import com.kuier.tool.core.Util.ArrayUtil;
+import com.kuier.tool.core.Util.ObjUtil;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -130,20 +131,21 @@ public class StrJoiner implements Appendable, Serializable {
             //TODO .....
             System.out.println(" 对象参数类型为Iterable 迭代器");
         } else {// 对象参数不为空
-            append("");
+            // 追加元素到拼接器中 对象转字符串
+            append(ObjUtil.toString(data));
         }
         // 返回 当前对象
         return this;
     }
 
     @Override
-    public Appendable append(CharSequence csq){
+    public Appendable append(CharSequence csq) {
         System.out.println(" ......... ???????????? ");
         return null;
     }
 
     @Override
-    public Appendable append(CharSequence csq, int start, int end){
+    public Appendable append(CharSequence csq, int start, int end) {
         return null;
     }
 

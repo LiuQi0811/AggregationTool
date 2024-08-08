@@ -11,6 +11,45 @@ import java.lang.reflect.Type;
  */
 public class Convert {
     /**
+     * toStr 转换为字符串
+     *
+     * @param data
+     * @return {@link String}
+     * @author LiuQi
+     */
+    public static String toStr(Object data) {
+        // 转换为字符串处理
+        return toStr(data, null);
+    }
+
+    /**
+     * toStr 转换为字符串
+     *
+     * @param value
+     * @param defaultValue
+     * @return {@link String}
+     * @author LiuQi
+     */
+    public static String toStr(Object value, String defaultValue) {
+        // 转换值为指定类型 可选是否不抛异常转换
+        return convertQuietly(String.class, value, defaultValue);
+    }
+
+    /**
+     * convertQuietly 转换值为指定类型 可选是否不抛异常转换
+     *
+     * @param type
+     * @param value
+     * @param defaultValue
+     * @param <T>
+     * @return
+     */
+    public static <T> T convertQuietly(Type type, Object value, T defaultValue) {
+        // 转换值为指定类型 可选是否不抛异常转换
+        return convertWithCheck(type, value, defaultValue, true);
+    }
+
+    /**
      * convertWithCheck 转换值为指定类型 可选是否不抛异常转换
      *
      * @param type
@@ -22,39 +61,18 @@ public class Convert {
      * @author LiuQi
      */
     public static <T> T convertWithCheck(Type type, Object value, T defaultValue, boolean quietly) {
-        System.out.println(" Convert with check " + type);
-        System.out.println(" Convert with check " + value);
-        System.out.println(" Convert with check " + defaultValue);
-        System.out.println(" Convert with check " + quietly);
         // 获取ConverterRegistry 单例实例
         ConverterRegistry registry = ConverterRegistry.getInstance();
-        // 转换值为指定类型
-        registry.convert(type, value, defaultValue);
-        System.out.println(" Convert with check " + registry);
-
-        return null;
-    }
-
-    static class F {
-        String name;
-        String address;
-
-        F(String name, String address) {
-            this.name = name;
-            this.address = address;
+        try {
+            // 返回转换值为指定类型
+            return registry.convert(type, value, defaultValue);
+        } catch (Exception e) {
+            if (quietly) { // 静默转换 true不抛异常
+                // 返回默认值
+                return defaultValue;
+            }
+            // 抛出RuntimeException 异常
+            throw new RuntimeException(e);
         }
-    }
-
-    static class K {
-        String name;
-        String address;
-
-        K() {
-
-        }
-    }
-
-    public static void main(String[] args) {
-        convertWithCheck(F.class, new F("江小白", "北京-东城区"), new K(), true);
     }
 }

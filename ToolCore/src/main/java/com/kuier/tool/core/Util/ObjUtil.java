@@ -1,5 +1,7 @@
 package com.kuier.tool.core.Util;
 
+import com.kuier.tool.core.Convert.Convert;
+
 import java.util.Map;
 import java.util.function.Supplier;
 
@@ -58,6 +60,6 @@ public class ObjUtil {
             return data.toString();
         }
         // 返回对象转字符串
-        return null;
+        return Convert.toStr(data);
     }
 }
