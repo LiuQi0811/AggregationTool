@@ -10,4 +10,11 @@ import com.kuier.tool.core.Convert.AbstractConverter;
  * @Version 1.0
  */
 public class StringConverter extends AbstractConverter<String> {
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    protected String convertInternal(Object value) {
+        System.out.println(" StringConverter.convertInternal 内部转换 .... ");
+        return null;
+    }
 }

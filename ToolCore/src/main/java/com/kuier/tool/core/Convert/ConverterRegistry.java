@@ -122,7 +122,8 @@ public class ConverterRegistry implements Serializable {
         // 获取标准转换器
         Converter<T> converter = getConverter(type, isCustomFirst);
         if (null != converter) { // 标准转换器不为空
-            // TODO 标准转换器不为空.....
+            // 转换为指定类型
+            return converter.convert(value, defaultValue);
         }
         // 获取Type对应的映射类类型
         Class<T> classType = (Class<T>) TypeUtil.getClass(type);

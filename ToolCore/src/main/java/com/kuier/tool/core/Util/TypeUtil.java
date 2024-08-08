@@ -45,6 +45,43 @@ public class TypeUtil {
     }
 
     /**
+     * getTypeArgument 获取给定类的泛型参数
+     *
+     * @param type
+     * @param index
+     * @return {@link Type}
+     * @author LiuQi
+     */
+    public static Type getTypeArgument(Type type, int index) {
+        // 获取给定类的所有泛型参数
+        Type[] typeArguments = getTypeArguments(type);
+        if (null != typeArguments && typeArguments.length > index) { // 泛型参数数组不为空 并且泛型参数长度 > 泛型参数索引
+            // 返回泛型参数数组中对应索引的泛型参数
+            return typeArguments[index];
+        }
+        // 返回null
+        return null;
+    }
+
+    /**
+     * getTypeArguments 获取给定类的所有泛型参数
+     *
+     * @param type
+     * @return {@link Type[]}
+     * @author LiuQi
+     */
+    public static Type[] getTypeArguments(Type type) {
+        if (null == type) { // 类型参数不为空
+            // 返回null
+            return null;
+        }
+        // 获取当前类或父类中泛型参数化后的类型
+        final ParameterizedType parameterizedType = toParameterizedType(type);
+        // 泛型参数化后的类型为空 返回null 则返回获取参数化类型实际类型参数的方法
+        return (null == parameterizedType) ? null : parameterizedType.getActualTypeArguments();
+    }
+
+    /**
      * toParameterizedType 获取当前类或父类中泛型参数化后的类型
      *
      * @param type
@@ -75,6 +112,7 @@ public class TypeUtil {
                 return generics[interfaceIndex];
             }
         }
+        // TODO 类型参数是其他类型 .....
         return null;
     }
 

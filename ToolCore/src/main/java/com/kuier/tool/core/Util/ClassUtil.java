@@ -1,5 +1,7 @@
 package com.kuier.tool.core.Util;
 
+import java.lang.reflect.Type;
+
 /**
  * @ClassName ClassUtil
  * @Description ClassUtil 类处理相关工具类
@@ -16,6 +18,7 @@ public class ClassUtil {
      * @author LiuQi
      */
     public static Class<?> getTypeArgument(Class<?> targetClass) {
+        // 返回获得给定类的泛型参数
         return getTypeArgument(targetClass, 0);
     }
 
@@ -28,7 +31,10 @@ public class ClassUtil {
      * @author LiuQi
      */
     public static Class<?> getTypeArgument(Class<?> targetClass, int index) {
-        return null;
+        // 获得给定类的泛型参数
+        Type argumentType = TypeUtil.getTypeArgument(targetClass, index);
+        // 返回 获取Type对应的映射类类型
+        return TypeUtil.getClass(argumentType);
     }
 
 }
