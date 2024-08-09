@@ -1,6 +1,9 @@
 package com.kuier.tool.core.Io.Resource;
 
-import java.net.MalformedURLException;
+import com.kuier.tool.core.Util.UrlUtil;
+
+import java.io.InputStream;
+import java.io.Serializable;
 import java.net.URL;
 
 /**
@@ -10,11 +13,17 @@ import java.net.URL;
  * @Date 2024/8/2 15:14
  * @Version 1.0
  */
-public class UrlResource implements Resource {
+public class UrlResource implements Resource, Serializable {
+    private static final long serialVersionUID = 1L;
+
     /**
      * 资源URL
      */
     protected URL url;
+    /**
+     * 名称
+     */
+    protected String name;
 
     /**
      * 参数构造 url
@@ -33,14 +42,17 @@ public class UrlResource implements Resource {
      */
     public UrlResource(URL url, String name) {
         this.url = url;
+        if (null != url) {
+
+        }
     }
 
-    static {
-        try {
-            UrlResource urlResource = new UrlResource(new URL("https://www.baidu.com"));
-            System.out.println(urlResource.url);
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
+    @Override
+    public InputStream getStream() {
+        if (null == url) { // url 为空
+            throw new RuntimeException("Resource URL is null!");
         }
+        // 返回流 从URL中获取流
+        return UrlUtil.getStream(url);
     }
 }

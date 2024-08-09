@@ -49,8 +49,12 @@ public class ResourceUtil {
      * @author LiuQi
      */
     public static InputStream getStreamSafe(String resource) {
-        // 获取资源文件对应的Resource对象
-        getResourceObj(resource);
+        try {
+            // 获取资源文件对应的Resource对象
+            return getResourceObj(resource).getStream();
+        } catch (Exception e) {
+            // IGNORE
+        }
         return null;
     }
 
@@ -65,6 +69,7 @@ public class ResourceUtil {
         if (StrUtil.isNotBlank(path)) { // 路径不为空
             if (path.startsWith(UrlUtil.FILE_URL_PREFIX) || FileUtil.isAbsolutePath(path)) { // 匹配的绝对路径
                 // TODO
+                System.out.println("匹配的绝对路径 .......... ");
             }
         }
         // 返回ClassPath单一资源访问类对象

@@ -38,6 +38,11 @@ public class JdkLoggerFactory extends LoggerFactory {
     private void readConfig() {
         System.out.println("读取配置文件 ");
         InputStream streamSafe = ResourceUtil.getStreamSafe("logger.properties");
+        System.out.println("readConfig  " + streamSafe);
+        if (null == streamSafe) { // stream输入流为空
+            System.err.println("[WARN] Can not find [logging.properties], use [%JRE_HOME%/lib/logging.properties] as default!");
+            return;
+        }
         try {
 
         } catch (Exception e) {
