@@ -47,4 +47,34 @@ public class Assert {
         // 返回检查参数对象
         return data;
     }
+
+    /**
+     * isFalse 断言是否为假 如果为 true 抛出  IllegalArgumentException  异常
+     *
+     * @param expression
+     * @param errorMsgTemplate
+     * @param params
+     * @throws IllegalArgumentException
+     * @author LiuQi
+     */
+    public static void isFalse(boolean expression, String errorMsgTemplate, Object... params) throws IllegalArgumentException {
+        // 调取 isFalse 断言是否为假方法
+        isFalse(expression, () -> new IllegalArgumentException(StrUtil.format(errorMsgTemplate, params)));
+    }
+
+    /**
+     * isFalse 断言是否为假 如果为 true 抛出指定类型异常 并使用指定的函数获取错误信息返回
+     *
+     * @param expression
+     * @param errorSupplier
+     * @param <E>
+     * @throws E
+     * @author LiuQi
+     */
+    public static <E extends Throwable> void isFalse(boolean expression, Supplier<E> errorSupplier) throws E {
+        if (expression) { // 布尔值为true
+            // 抛出异常信息
+            throw errorSupplier.get();
+        }
+    }
 }

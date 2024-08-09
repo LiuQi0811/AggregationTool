@@ -37,4 +37,15 @@ public class ClassUtil {
         return TypeUtil.getClass(argumentType);
     }
 
+    /**
+     * getClassLoader 获取ClassLoader 类加载器
+     *
+     * @return {@link ClassLoader}
+     * @author LiuQi
+     */
+    public static ClassLoader getClassLoader() {
+        // 返回 获取类加载器
+        return ClassLoaderUtil.getClassLoader();
+    }
+
 }

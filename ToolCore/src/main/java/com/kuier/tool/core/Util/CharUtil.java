@@ -1,5 +1,7 @@
 package com.kuier.tool.core.Util;
 
+import com.kuier.tool.core.Text.CharPool;
+
 /**
  * @ClassName CharUtil
  * @Description CharUtil 字符工具类
@@ -7,7 +9,7 @@ package com.kuier.tool.core.Util;
  * @Date 2024/8/2 14:37
  * @Version 1.0
  */
-public class CharUtil {
+public class CharUtil implements CharPool {
     /**
      * isBlankChar 字符为空处理
      *
@@ -58,5 +60,15 @@ public class CharUtil {
         }
         // 返回 字符相等处理
         return char_ == char__;
+    }
+
+    /**
+     * isFileSeparator 是否为Windows或者Linux（Unix）文件分隔符
+     *
+     * @return
+     */
+    public static boolean isFileSeparator(char char_) {
+        //  返回 Windows或者Linux（Unix）文件分隔符匹配结果
+        return SLASH == char_ || BACKSLASH == char_;
     }
 }

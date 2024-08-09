@@ -135,4 +135,16 @@ public class FileUtil {
         // 返回 用户主目录路径
         return System.getProperty("user.home");
     }
+
+    /**
+     * getName 获取 返回文件名
+     *
+     * @param filePath
+     * @return {@link String}
+     * @author LiuQi
+     */
+    public static String getName(String filePath) {
+        // 返回 文件名
+        return FileNameUtil.getName(filePath);
+    }
 }

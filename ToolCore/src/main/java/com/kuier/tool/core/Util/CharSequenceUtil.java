@@ -528,4 +528,27 @@ public class CharSequenceUtil {
         // 字符参数不为空 返回字符串长度 则返回0
         return null == sequence ? 0 : sequence.length();
     }
+
+    /**
+     * removePrefix 移除指定前缀
+     *
+     * @param charStr
+     * @param prefix
+     * @return {@link String}
+     * @author LiuQi
+     */
+    public static String removePrefix(CharSequence charStr, CharSequence prefix) {
+        if (isEmpty(charStr) || isEmpty(prefix)) { // 字符串参数 或者 前缀参数为空
+            // 返回转字符串处理后的结果
+            return str(charStr);
+        }
+        // 参数字符转字符串
+        final String charStr_ = charStr.toString();
+        if (charStr_.startsWith(prefix.toString())) { // 参数字符串开头以前缀开头
+            // 返回移除前缀后的字符串
+            return subSuf(charStr_, prefix.length());
+        }
+        // 返回转字符串处理后的结果
+        return charStr_;
+    }
 }
