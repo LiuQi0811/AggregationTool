@@ -14,7 +14,7 @@ public class CharUtil {
      * @param char_
      * @return
      */
-    public static Boolean isBlankChar(char char_) {
+    public static boolean isBlankChar(char char_) {
         // 返回 字符串为空处理
         return isBlankChar(((int) char_));
     }
@@ -25,7 +25,7 @@ public class CharUtil {
      * @param char_
      * @return
      */
-    public static Boolean isBlankChar(int char_) {
+    public static boolean isBlankChar(int char_) {
 
         return
                 // 检查指定的字符是否为空白字符
@@ -48,10 +48,10 @@ public class CharUtil {
      * @param char_
      * @param char__
      * @param ignoreCase
-     * @return {@link Boolean}
+     * @return {@link boolean}
      * @author LiuQi
      */
-    public static Boolean equals(char char_, char char__, boolean ignoreCase) {
+    public static boolean equals(char char_, char char__, boolean ignoreCase) {
         if (ignoreCase) { // 忽略大小写
             // 返回 字符串相等处理（含是否忽略大小写）
             return Character.toLowerCase(char_) == Character.toLowerCase(char__);

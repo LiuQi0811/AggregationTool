@@ -55,9 +55,9 @@ public class CharSequenceUtil {
      * isNotBlank 字符串非空处理
      *
      * @param charStr
-     * @return {@link Boolean}
+     * @return {@link boolean}
      */
-    public static Boolean isNotBlank(CharSequence charStr) {
+    public static boolean isNotBlank(CharSequence charStr) {
         return !isBlank(charStr);
     }
 
@@ -65,9 +65,9 @@ public class CharSequenceUtil {
      * isBlank 字符串为空处理
      *
      * @param charStr
-     * @return {@link Boolean}
+     * @return {@link boolean}
      */
-    public static Boolean isBlank(CharSequence charStr) {
+    public static boolean isBlank(CharSequence charStr) {
         // 定义字符长度变量
         final int len;
         if (charStr == null || (len = charStr.length()) == 0) { // 字符为空 或者字符长度等于0
@@ -88,22 +88,33 @@ public class CharSequenceUtil {
      * isEmpty 字符串为空处理
      *
      * @param charStr
-     * @return {@link  Boolean}
+     * @return {@link  boolean}
      * @author LiuQi
      */
-    public static Boolean isEmpty(CharSequence charStr) {
+    public static boolean isEmpty(CharSequence charStr) {
         // 字符为空 或者字符长度等于0 返回true
         return charStr == null || charStr.length() == 0;
+    }
+
+    /**
+     * isNotEmpty 字符串非空处理
+     *
+     * @param charStr
+     * @return {@link  boolean}
+     * @author LiuQi
+     */
+    public static boolean isNotEmpty(CharSequence charStr) {
+        return !isEmpty(charStr);
     }
 
     /**
      * isEmptyIfStr 字符串为空处理
      *
      * @param data
-     * @return {@link Boolean}
+     * @return {@link boolean}
      * @author LiuQi
      */
-    public static Boolean isEmptyIfStr(Object data) {
+    public static boolean isEmptyIfStr(Object data) {
         if (null == data) { // 参数为空
             // 返回 true
             return true;
@@ -215,10 +226,10 @@ public class CharSequenceUtil {
      *
      * @param charStr
      * @param prefix
-     * @return {@link Boolean}
+     * @return {@link boolean}
      * @author LiuQi
      */
-    public static Boolean startWithIgnoreCase(CharSequence charStr, CharSequence prefix) {
+    public static boolean startWithIgnoreCase(CharSequence charStr, CharSequence prefix) {
         // 返回 是否以指定字符串开头（含是否忽略字符串大小写）
         return startWith(charStr, prefix, true);
     }
@@ -228,10 +239,10 @@ public class CharSequenceUtil {
      *
      * @param charStr
      * @param char_
-     * @return {@link Boolean}
+     * @return {@link boolean}
      * @author LiuQi
      */
-    public static Boolean startWith(CharSequence charStr, char char_) {
+    public static boolean startWith(CharSequence charStr, char char_) {
         if (isEmpty(charStr)) { // 字符串参数为空
             // 返回 false
             return false;
@@ -246,10 +257,10 @@ public class CharSequenceUtil {
      * @param charStr
      * @param prefix
      * @param ignoreCase
-     * @return {@link Boolean}
+     * @return {@link boolean}
      * @author LiuQi
      */
-    public static Boolean startWith(CharSequence charStr, CharSequence prefix, boolean ignoreCase) {
+    public static boolean startWith(CharSequence charStr, CharSequence prefix, boolean ignoreCase) {
         // 返回 是否以指定字符串开头（含是否忽略字符串大小写 字符串相等）
         return startWith(charStr, prefix, ignoreCase, false);
     }
@@ -261,10 +272,10 @@ public class CharSequenceUtil {
      * @param prefix
      * @param ignoreCase
      * @param ignoreEquals
-     * @return {@link Boolean}
+     * @return {@link boolean}
      * @author LiuQi
      */
-    public static Boolean startWith(CharSequence charStr, CharSequence prefix, boolean ignoreCase, boolean ignoreEquals) {
+    public static boolean startWith(CharSequence charStr, CharSequence prefix, boolean ignoreCase, boolean ignoreEquals) {
         if (null == charStr || null == prefix) {// 字符串 或者字符串开头 为空
             if (ignoreEquals) { // 不忽略字符串相等情况
                 // 返回 false
@@ -287,10 +298,10 @@ public class CharSequenceUtil {
      * @param charStr
      * @param charStr_
      * @param ignoreCase
-     * @return {@link Boolean}
+     * @return {@link boolean}
      * @author LiuQi
      */
-    public static Boolean equals(CharSequence charStr, CharSequence charStr_, boolean ignoreCase) {
+    public static boolean equals(CharSequence charStr, CharSequence charStr_, boolean ignoreCase) {
         if (null == charStr) { // 第一个字符串参数为空
             // 第二个字符串参数为空 返回 true
             return charStr_ == null;
@@ -504,5 +515,17 @@ public class CharSequenceUtil {
     public static List<String> split(CharSequence charStr, char separator, int limit, boolean isTrim, boolean ignoreEmpty) {
         // 返回字符串分割
         return StrSplitter.split(charStr, separator, limit, isTrim, ignoreEmpty);
+    }
+
+    /**
+     * length 获取字符串的长度
+     *
+     * @param sequence
+     * @return {@link int}
+     * @author LiuQi
+     */
+    public static int length(CharSequence sequence) {
+        // 字符参数不为空 返回字符串长度 则返回0
+        return null == sequence ? 0 : sequence.length();
     }
 }

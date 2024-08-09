@@ -15,10 +15,10 @@ public class NumberUtil {
      * @param char_
      * @param char__
      * @param ignoreCase
-     * @return {@link Boolean}
+     * @return {@link boolean}
      * @author LiuQi
      */
-    public static Boolean equals(char char_, char char__, boolean ignoreCase) {
+    public static boolean equals(char char_, char char__, boolean ignoreCase) {
         // 字符相等处理
         return CharUtil.equals(char_, char__, ignoreCase);
     }

@@ -2,6 +2,7 @@ package com.kuier.tool.core.Text;
 
 import com.kuier.tool.core.Util.ArrayUtil;
 import com.kuier.tool.core.Util.ObjUtil;
+import com.kuier.tool.core.Util.StrUtil;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -35,6 +36,21 @@ public class StrJoiner implements Appendable, Serializable {
      * 后缀
      */
     private CharSequence suffix;
+
+    /**
+     * 是否包含内容
+     */
+    private boolean hasContent;
+
+    /**
+     * 前缀和后缀是否包装每个元素 true表示包装每个元素 false包装整个字符串
+     */
+    private boolean wrapElement;
+
+    /**
+     * 当结果为空时默认返回的拼接结果
+     */
+    private String emptyResult = StrUtil.EMPTY;
 
     /**
      * 构造方法
@@ -92,6 +108,32 @@ public class StrJoiner implements Appendable, Serializable {
     }
 
     /**
+     * prepare 准备连接器
+     *
+     * @return
+     * @throws IOException
+     */
+    private Appendable prepare() throws IOException {
+        if (hasContent) { // appendable中 包含内容
+            // 追加连接符/分隔符
+            appendable.append(delimiter);
+        } else { // appendable中 不包含内容
+            if (null == appendable) { // 连接器为空
+                // 创建StringBuilder对象
+                appendable = new StringBuilder();
+            }
+            if (false == wrapElement && StrUtil.isNotEmpty(prefix)) { // 前缀和后缀 包装整个字符串 并且 前缀不为空
+                // 追加前缀
+                appendable.append(prefix);
+            }
+            // appendable中内容状态为true包含内容
+            hasContent = true;
+        }
+        // 返回处理后的连接器
+        return appendable;
+    }
+
+    /**
      * append 追加元素到拼接器中
      *
      * @param iterator
@@ -139,18 +181,66 @@ public class StrJoiner implements Appendable, Serializable {
     }
 
     @Override
-    public Appendable append(CharSequence csq) {
-        System.out.println(" ......... ???????????? ");
-        return null;
+    public StrJoiner append(CharSequence sequence) {
+        // 调取append方法 追加元素到拼接器中
+        return append(sequence, 0, StrUtil.length(sequence));
     }
 
     @Override
-    public Appendable append(CharSequence csq, int start, int end) {
-        return null;
+    public StrJoiner append(CharSequence sequence, int startInclude, int endExclude) {
+        if (null == sequence) { //  字符参数为空
+            // TODO 字符参数为空.....
+            System.out.println(" ..字符参数为空 ...");
+        }
+        try {
+            // 准备连接器
+            final Appendable prepare = prepare();
+            if (wrapElement && StrUtil.isNotEmpty(prefix)) { // 前缀和后缀 包装每个元素 并且前缀不为空
+                // 连接器追加前缀
+                prepare.append(prefix);
+            }
+            // 连接器追加元素
+            prepare.append(sequence, startInclude, endExclude);
+            if (wrapElement && StrUtil.isNotEmpty(suffix)) { // 前缀和后缀 包装每个元素 并且后缀不为空
+                // 连接器追加后缀
+                prepare.append(suffix);
+            }
+        } catch (IOException e) {
+            //IGNORE
+        }
+        return this;
     }
 
     @Override
-    public Appendable append(char c) throws IOException {
-        return null;
+    public StrJoiner append(char char_) throws IOException {
+        // 调取append方法 追加元素到拼接器中
+        return append(String.valueOf(char_));
+    }
+
+    @Override
+    public String toString() {
+        if (null == appendable) { // 连接器为空
+            return emptyResult;
+        }
+        // 连接器字符串
+        String result = appendable.toString();
+        if (false == wrapElement && StrUtil.isNotEmpty(suffix)) { // 前缀和后缀 包装整个字符串 并且 后缀不为空
+            // 连接器字符串 拼接处理
+            result += suffix;
+        }
+        // 返回连接器处理后的字符串
+        return result;
+    }
+
+    public static void main(String[] args) {
+        try {
+            final Appendable prepare = new StrJoiner("/").prepare();
+            prepare.append("I ");
+            prepare.append("Love ");
+            prepare.append("!");
+            System.out.println(prepare);
+        } catch (Exception e) {
+
+        }
     }
 }

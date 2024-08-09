@@ -16,10 +16,10 @@ public class ReUtil {
      *
      * @param pattern
      * @param charSequence
-     * @return {@link Boolean}
+     * @return {@link boolean}
      * @author LiuQi
      */
-    public static Boolean isMatch(Pattern pattern, CharSequence charSequence) {
+    public static boolean isMatch(Pattern pattern, CharSequence charSequence) {
         if (null == pattern || null == charSequence) { // 匹配参数为空
             return false;
         }

@@ -22,10 +22,10 @@ public class FileUtil {
      * isAbsolutePath 是否是绝对路径处理
      *
      * @param path
-     * @return {@link Boolean}
+     * @return {@link boolean}
      * @author LiuQi
      */
-    public static Boolean isAbsolutePath(String path) {
+    public static boolean isAbsolutePath(String path) {
         if (StrUtil.isEmpty(path)) { // 路径为空
             // 返回 false
             return false;
@@ -86,8 +86,10 @@ public class FileUtil {
             }
         }
         if (pathToUse.startsWith(StrUtil.SLASH)) { // 路径以 / 开头
-            // TODO
-            System.out.println(" 路径以 / 开头 ___ ___");
+            // 前缀拼接
+            prefix += StrUtil.SLASH;
+            // 截取路径的第一个斜杠
+            pathToUse = pathToUse.substring(1);
         }
         // 路径列表
         List<String> pathList = StrUtil.split(pathToUse, StrUtil.C_SLASH);
@@ -119,6 +121,7 @@ public class FileUtil {
             //TODO 上级路径数量大于0 且 前缀为空  逻辑待补充
             System.out.println(" 上级路径数量大于0 且 前缀为空 ___ ___");
         }
+        // 返回 前缀 + 路径元素列表 拼接处理后的结果
         return prefix + CollUtil.join(pathElementList, StrUtil.SLASH);
     }
 

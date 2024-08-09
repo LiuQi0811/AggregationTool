@@ -18,10 +18,10 @@ public class TypeUtil {
      * isUnknown 是否为未知类型
      *
      * @param type
-     * @return {@link Boolean}
+     * @return {@link boolean}
      * @author LiuQi
      */
-    public static Boolean isUnknown(Type type) {
+    public static boolean isUnknown(Type type) {
         // 类型参数为空 或者 类型参数是 TypeVariable 返回true 则返回false
         return null == type || type instanceof TypeVariable;
     }

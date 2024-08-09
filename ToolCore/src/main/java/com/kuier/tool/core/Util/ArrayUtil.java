@@ -13,10 +13,10 @@ public class ArrayUtil {
      *
      * @param data
      * @param <T>
-     * @return {@link Boolean}
+     * @return {@link boolean}
      * @author LiuQi
      */
-    public static <T> Boolean isEmpty(T[] data) {
+    public static <T> boolean isEmpty(T[] data) {
         // 返回空数组
         return data == null || data.length == 0;
     }
@@ -26,10 +26,10 @@ public class ArrayUtil {
      *
      * @param data
      * @param <T>
-     * @return {@link Boolean}
+     * @return {@link boolean}
      * @author LiuQi
      */
-    public static <T> Boolean isArray(Object data) {
+    public static <T> boolean isArray(Object data) {
         // 对象参数不为空并且类型为数组 返回true 则返回false
         return null != data && data.getClass().isArray();
     }

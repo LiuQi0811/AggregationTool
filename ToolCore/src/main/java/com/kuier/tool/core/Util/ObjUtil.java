@@ -36,10 +36,10 @@ public class ObjUtil {
      * isNull 参数是否为空
      *
      * @param data
-     * @return {@link  Boolean}
+     * @return {@link  boolean}
      * @author LiuQi
      */
-    public static Boolean isNull(Object data) {
+    public static boolean isNull(Object data) {
         // 为空返回 true 否则返回 false
         return null == data || data.equals(null);
     }
