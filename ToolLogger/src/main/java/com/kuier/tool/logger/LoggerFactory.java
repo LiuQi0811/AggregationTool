@@ -69,7 +69,7 @@ public abstract class LoggerFactory {
     }
 
     /**
-     * loggerInstance 获取LoggerFactory
+     * loggerInstance 获取Logger
      *
      * @param clazz
      * @return
@@ -106,8 +106,11 @@ public abstract class LoggerFactory {
      */
     public static LoggerFactory create() {
         // 创建LoggerFactory日志工厂决定日志实现
-        LoggerFactory loggerFactory = doCreate();
-        loggerFactory.getLogger(LoggerFactory.class);
+        final LoggerFactory loggerFactory = doCreate();
+        // 获取Logger
+        loggerFactory.getLogger(LoggerFactory.class)
+                // DEBUG 日志级别
+                .debug("Use [{}] Logger As Default.", loggerFactory.name);
         return loggerFactory;
     }
 

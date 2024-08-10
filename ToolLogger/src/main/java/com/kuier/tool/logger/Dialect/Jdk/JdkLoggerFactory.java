@@ -4,7 +4,9 @@ import com.kuier.tool.core.Util.ResourceUtil;
 import com.kuier.tool.logger.Logger;
 import com.kuier.tool.logger.LoggerFactory;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.util.logging.LogManager;
 
 /**
  * @ClassName JdkLoggerFactory
@@ -44,11 +46,23 @@ public class JdkLoggerFactory extends LoggerFactory {
             return;
         }
         try {
-
+            // 读取日志配置
+            LogManager.getLogManager().readConfiguration(streamSafe);
         } catch (Exception e) {
-
+            // TODO
+            try {
+                // 读取日志配置
+                LogManager.getLogManager().readConfiguration();
+            } catch (Exception e_) {
+                // TODO
+            }
         } finally {
-
+            // TODO IoUtil.close();
+            try {
+                streamSafe.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }

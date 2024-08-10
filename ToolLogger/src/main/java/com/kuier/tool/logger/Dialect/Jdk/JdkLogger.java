@@ -4,6 +4,7 @@ package com.kuier.tool.logger.Dialect.Jdk;
 import com.kuier.tool.core.Util.StrUtil;
 import com.kuier.tool.logger.AbstractLogger;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -14,6 +15,7 @@ import java.util.logging.Logger;
  * @Version 1.0
  */
 public class JdkLogger extends AbstractLogger {
+    private static final long serialVersionUID = -6843151523380063975L;
 
     /**
      * transient 成员变量在对象序列化时被忽略
@@ -55,5 +57,27 @@ public class JdkLogger extends AbstractLogger {
     @Override
     public String getName() {
         return logger.getName();
+    }
+
+    @Override
+    public void debug(String fullyQualifiedClassName, Throwable throwable, String format, Object... params) {
+        // 调取loggerIfEnable 方法 打印对应等级的日志
+        loggerIfEnable(fullyQualifiedClassName, Level.FINE, throwable, format, params);
+    }
+
+    /**
+     * loggerIfEnable 打印对应等级的日志
+     *
+     * @param callerFullyQualifiedClassName
+     * @param level
+     * @param throwable
+     * @param format
+     * @param params
+     * @author LiuQi
+     */
+    private void loggerIfEnable(String callerFullyQualifiedClassName, Level level, Throwable throwable, String format, Object... params) {
+        if (logger.isLoggable(level)) {
+            System.out.println(" FQCN 全限定类名........... " + callerFullyQualifiedClassName + " " + level);
+        }
     }
 }
