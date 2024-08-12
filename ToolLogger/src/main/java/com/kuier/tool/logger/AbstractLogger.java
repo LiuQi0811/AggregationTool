@@ -31,8 +31,20 @@ public abstract class AbstractLogger implements Logger, Serializable {
 
     @Override
     public void debug(Throwable throwable, String format, Object... params) {
-        // 调取debug方法 （含）
+        // 调取debug方法 （含类全限定名）
         debug(FQCN, throwable, format, params);
+    }
+
+    @Override
+    public void info(String format, Object... params) {
+        // 调取info方法
+        info(null, format, params);
+    }
+
+    @Override
+    public void info(Throwable throwable, String format, Object... params) {
+        // 调取info方法（含类全限定名）
+        info(FQCN, throwable, format, params);
     }
 
     @Override
@@ -41,6 +53,10 @@ public abstract class AbstractLogger implements Logger, Serializable {
             case DEBUG -> {
                 // 是否启用DEBUG级别日志 返回true启用则不启用
                 return isDebugEnabled();
+            }
+            case INFO -> {
+                // 是否启用INFO级别日志 返回true启用则不启用
+                return isInfoEnabled();
             }
             default -> {
                 // error异常抛出

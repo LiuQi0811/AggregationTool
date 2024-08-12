@@ -1,6 +1,7 @@
 package com.kuier.tool.logger;
 
 import com.kuier.tool.logger.Level.DebugLogger;
+import com.kuier.tool.logger.Level.InfoLogger;
 import com.kuier.tool.logger.Level.Level;
 
 /**
@@ -10,7 +11,7 @@ import com.kuier.tool.logger.Level.Level;
  * @Date 2024/7/27 16:45
  * @Version 1.0
  */
-public interface Logger extends DebugLogger {
+public interface Logger extends DebugLogger, InfoLogger {
     /**
      * getName 获取日志名称
      *
