@@ -100,6 +100,19 @@ public class JdkLogger extends AbstractLogger {
     }
 
     @Override
+    public void trace(String fullyQualifiedClassName, Throwable throwable, String format, Object... params) {
+        // 调取loggerIfEnable 方法 打印对应等级的日志
+        loggerIfEnable(fullyQualifiedClassName, Level.FINEST, throwable, format, params);
+    }
+
+    @Override
+    public boolean isTraceEnabled() {
+        // 日志等级是否大于等于 trace 等级
+        // Level.FINEST 等级
+        return logger.isLoggable(Level.FINEST);
+    }
+
+    @Override
     public void error(String fullyQualifiedClassName, Throwable throwable, String format, Object... params) {
         // 调取loggerIfEnable 方法 打印对应等级的日志
         loggerIfEnable(fullyQualifiedClassName, Level.SEVERE, throwable, format, params);

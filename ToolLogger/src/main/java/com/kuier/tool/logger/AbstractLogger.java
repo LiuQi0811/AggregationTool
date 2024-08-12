@@ -60,6 +60,18 @@ public abstract class AbstractLogger implements Logger, Serializable {
     }
 
     @Override
+    public void trace(String format, Object... params) {
+        // 调取trace方法
+        trace(null, format, params);
+    }
+
+    @Override
+    public void trace(Throwable throwable, String format, Object... params) {
+        // 调取trace方法（含类全限定名）
+        trace(FQCN, throwable, format, params);
+    }
+
+    @Override
     public void error(String format, Object... params) {
         // 调取error方法
         error(null, format, params);
@@ -86,6 +98,10 @@ public abstract class AbstractLogger implements Logger, Serializable {
             case WARN -> {
                 // 是否启用WARN级别日志 返回true启用则不启用
                 return isWarnEnabled();
+            }
+            case TRACE -> {
+                // 是否启用TRACE级别日志 返回true启用则不启用
+                return isTraceEnabled();
             }
             case ERROR -> {
                 // 是否启用ERROR级别日志 返回true启用则不启用

@@ -9,7 +9,7 @@ import com.kuier.tool.logger.Level.*;
  * @Date 2024/7/27 16:45
  * @Version 1.0
  */
-public interface Logger extends DebugLogger, InfoLogger, ErrorLogger, WarnLogger {
+public interface Logger extends DebugLogger, InfoLogger, WarnLogger, TraceLogger, ErrorLogger {
     /**
      * getName 获取日志名称
      *
