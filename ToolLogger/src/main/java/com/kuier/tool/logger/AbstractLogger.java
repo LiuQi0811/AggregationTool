@@ -48,6 +48,19 @@ public abstract class AbstractLogger implements Logger, Serializable {
     }
 
     @Override
+    public void error(String format, Object... params) {
+        // 调取error方法
+        error(null, format, params);
+    }
+
+    @Override
+    public void error(Throwable throwable, String format, Object... params) {
+        // 调取error方法（含类全限定名）
+        error(FQCN, throwable, format, params);
+    }
+
+
+    @Override
     public boolean isEnabled(Level level) {
         switch (level) { // 日志级别匹配
             case DEBUG -> {
@@ -57,6 +70,10 @@ public abstract class AbstractLogger implements Logger, Serializable {
             case INFO -> {
                 // 是否启用INFO级别日志 返回true启用则不启用
                 return isInfoEnabled();
+            }
+            case ERROR -> {
+                // 是否启用ERROR级别日志 返回true启用则不启用
+                return isErrorEnabled();
             }
             default -> {
                 // error异常抛出

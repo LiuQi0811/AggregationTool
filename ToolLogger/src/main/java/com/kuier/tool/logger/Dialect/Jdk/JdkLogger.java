@@ -86,6 +86,18 @@ public class JdkLogger extends AbstractLogger {
         return logger.isLoggable(Level.INFO);
     }
 
+    @Override
+    public void error(String fullyQualifiedClassName, Throwable throwable, String format, Object... params) {
+        loggerIfEnable(fullyQualifiedClassName, Level.SEVERE, throwable, format, params);
+    }
+
+    @Override
+    public boolean isErrorEnabled() {
+        // 日志等级是否大于等于 error 等级
+        // Level.SEVERE 等级
+        return logger.isLoggable(Level.SEVERE);
+    }
+
     /**
      * loggerIfEnable 打印对应等级的日志
      *
