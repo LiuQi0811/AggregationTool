@@ -110,7 +110,7 @@ public abstract class LoggerFactory {
         // 获取Logger
         loggerFactory.getLogger(LoggerFactory.class)
                 // DEBUG 日志级别
-                .debug("Use [{}] Logger As Default.", loggerFactory.name);
+                .debug("当前使用日志类型 ---> {} ", loggerFactory.name);
         return loggerFactory;
     }
 
