@@ -1,6 +1,7 @@
 package com.kuier.tool.logger;
 
 import com.kuier.tool.logger.Level.DebugLogger;
+import com.kuier.tool.logger.Level.Level;
 
 /**
  * @ClassName Logger
@@ -17,4 +18,13 @@ public interface Logger extends DebugLogger {
      * @author LiuQi
      */
     String getName();
+
+    /**
+     * isEnabled 是否启用日志级别
+     *
+     * @param level
+     * @return {@link boolean}
+     * @author LiuQi
+     */
+    boolean isEnabled(Level level);
 }

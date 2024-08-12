@@ -1,6 +1,7 @@
 package com.kuier.tool.logger;
 
 import com.kuier.tool.core.Util.StrUtil;
+import com.kuier.tool.logger.Level.Level;
 
 import java.io.Serializable;
 
@@ -32,5 +33,19 @@ public abstract class AbstractLogger implements Logger, Serializable {
     public void debug(Throwable throwable, String format, Object... params) {
         // 调取debug方法 （含）
         debug(FQCN, throwable, format, params);
+    }
+
+    @Override
+    public boolean isEnabled(Level level) {
+        switch (level) { // 日志级别匹配
+            case DEBUG -> {
+                // 是否启用DEBUG级别日志 返回true启用则不启用
+                return isDebugEnabled();
+            }
+            default -> {
+                // error异常抛出
+                throw new Error(StrUtil.format("无法识别日志级别: {}", level));
+            }
+        }
     }
 }

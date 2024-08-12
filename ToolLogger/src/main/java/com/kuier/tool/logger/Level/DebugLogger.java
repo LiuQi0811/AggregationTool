@@ -38,4 +38,11 @@ public interface DebugLogger {
      * @author LiuQi
      */
     void debug(String fullyQualifiedClassName, Throwable throwable, String format, Object... params);
+
+    /**
+     * isDebugEnabled 是否启用DEBUG级别日志
+     *
+     * @author LiuQi
+     */
+    boolean isDebugEnabled();
 }

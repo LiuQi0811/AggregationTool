@@ -66,6 +66,13 @@ public class JdkLogger extends AbstractLogger {
         loggerIfEnable(fullyQualifiedClassName, Level.FINE, throwable, format, params);
     }
 
+    @Override
+    public boolean isDebugEnabled() {
+        // 日志等级是否大于等于 debug 等级
+        // Level.FINE 等级
+        return logger.isLoggable(Level.FINE);
+    }
+
     /**
      * loggerIfEnable 打印对应等级的日志
      *
