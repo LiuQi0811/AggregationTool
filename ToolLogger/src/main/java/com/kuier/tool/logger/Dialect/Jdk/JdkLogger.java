@@ -87,7 +87,21 @@ public class JdkLogger extends AbstractLogger {
     }
 
     @Override
+    public void warn(String fullyQualifiedClassName, Throwable throwable, String format, Object... params) {
+        // 调取loggerIfEnable 方法 打印对应等级的日志
+        loggerIfEnable(fullyQualifiedClassName, Level.WARNING, throwable, format, params);
+    }
+
+    @Override
+    public boolean isWarnEnabled() {
+        // 日志等级是否大于等于 warn 等级
+        // Level.WARNING 等级
+        return logger.isLoggable(Level.WARNING);
+    }
+
+    @Override
     public void error(String fullyQualifiedClassName, Throwable throwable, String format, Object... params) {
+        // 调取loggerIfEnable 方法 打印对应等级的日志
         loggerIfEnable(fullyQualifiedClassName, Level.SEVERE, throwable, format, params);
     }
 

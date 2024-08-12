@@ -48,6 +48,18 @@ public abstract class AbstractLogger implements Logger, Serializable {
     }
 
     @Override
+    public void warn(String format, Object... params) {
+        // 调取warn方法
+        warn(null, format, params);
+    }
+
+    @Override
+    public void warn(Throwable throwable, String format, Object... params) {
+        // 调取warn方法（含类全限定名）
+        warn(FQCN, throwable, format, params);
+    }
+
+    @Override
     public void error(String format, Object... params) {
         // 调取error方法
         error(null, format, params);
@@ -70,6 +82,10 @@ public abstract class AbstractLogger implements Logger, Serializable {
             case INFO -> {
                 // 是否启用INFO级别日志 返回true启用则不启用
                 return isInfoEnabled();
+            }
+            case WARN -> {
+                // 是否启用WARN级别日志 返回true启用则不启用
+                return isWarnEnabled();
             }
             case ERROR -> {
                 // 是否启用ERROR级别日志 返回true启用则不启用
