@@ -1,10 +1,14 @@
 package com.kuier.tool.core.Util;
 
+import com.kuier.tool.core.Collection.EnumerationIterator;
+import com.kuier.tool.core.Io.Exception.IORuntimeException;
 import com.kuier.tool.core.Io.Resource.ClassPathResource;
 import com.kuier.tool.core.Io.Resource.Resource;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Enumeration;
 
 /**
  * @ClassName ResourceUtil
@@ -74,5 +78,26 @@ public class ResourceUtil {
         }
         // 返回ClassPath单一资源访问类对象
         return new ClassPathResource(path);
+    }
+
+    /**
+     * getResourceIterator 获取指定路径下的资源文件迭代器
+     * @param resource
+     * @param classLoader
+     * @author LiuQi
+     */
+    public static EnumerationIterator getResourceIterator(String resource, ClassLoader classLoader){
+        // 定义资源文件
+        Enumeration<URL> resources = null;
+        try {
+            // 如果classLoader为null，则使用默认的类加载器
+            classLoader = ObjUtil.defaultIfNull(classLoader, ClassUtil::getClassLoader);
+            // 获取资源文件
+            resources = classLoader.getResources(resource);
+        }catch (final IOException e){
+            throw new IORuntimeException(e);
+        }
+        // 返回枚举迭代器 EnumerationIterator 对象
+        return new EnumerationIterator<>(resources);
     }
 }
