@@ -293,6 +293,72 @@ public class CharSequenceUtil {
     }
 
     /**
+     * endWith 是否以指定字符串结尾处理
+     * @param charStr
+     * @param char_
+     * @return {@link boolean}
+     * @author LiuQi
+     */
+    public static boolean endWith(CharSequence charStr, char char_){
+        if(isEmpty(charStr)){ // 字符串参数为空
+            return false;
+        }
+        // 返回字符参数 与字符串参数的最后一个字符对比
+        return char_ == charStr.charAt(charStr.length() - 1);
+    }
+
+    /**
+     * endWith 是否以指定字符串结尾处理 (不忽略大小写)
+     * @param charStr
+     * @param suffix
+     * @return
+     */
+    public static boolean endWith(CharSequence charStr,CharSequence suffix){
+        // 返回 是否以指定字符串结尾（不忽略大小写）
+        return endWith(charStr,suffix,false);
+    }
+
+    /**
+     * endWith 是否以指定字符串结尾处理 (不忽略相等)
+     * @param charStr
+     * @param suffix
+     * @param ignoreCase
+     * @return {@link boolean}
+     * @author LiuQi
+     */
+    public static boolean endWith(CharSequence charStr,CharSequence suffix,boolean ignoreCase){
+        return endWith(charStr,suffix,ignoreCase,false);
+    }
+
+    /**
+     * endWith 是否以指定字符串结尾处理
+     * @param charStr
+     * @param suffix
+     * @param ignoreCase
+     * @param ignoreEquals
+     * @return {@link boolean}
+     * @author LiuQi
+     */
+    public static boolean endWith(CharSequence charStr,CharSequence suffix,boolean ignoreCase,boolean ignoreEquals){
+        if(null == charStr || null == suffix){ // 字符串 或者字符串后缀 为空
+            if(ignoreEquals){ // 忽略相等
+                return false;
+            }
+            // 字符串 或者字符串后缀 都为空返回
+            return null == charStr && null == suffix;
+        }
+        // 获取字符串偏移量 字符串长度 - 字符串后缀长度
+        final int strOffset = charStr.length() - suffix.length();
+        // 字符串 从偏移量开始 到 字符串长度 的字符串 是否与 字符串后缀 匹配
+        boolean isEndWith = charStr.toString().regionMatches(ignoreCase, strOffset, suffix.toString(), 0, suffix.length());
+        if(isEndWith){ // 字符串后缀匹配
+            // 返回 是否忽略相等 或者 字符串相等
+            return (false == ignoreEquals) || (false == equals(charStr,suffix,ignoreCase));
+        }
+        return false;
+    }
+
+    /**
      * equals 字符串是否相等初处理（含是否忽略字符串大小写）
      *
      * @param charStr
