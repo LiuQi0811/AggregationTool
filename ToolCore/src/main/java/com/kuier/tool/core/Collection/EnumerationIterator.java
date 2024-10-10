@@ -2,7 +2,6 @@ package com.kuier.tool.core.Collection;
 
 import java.io.Serializable;
 import java.util.Enumeration;
-import java.util.Iterator;
 
 /**
  * @ClassName EnumerationIterator
@@ -11,7 +10,7 @@ import java.util.Iterator;
  * @Date 2024/10/10 15:50
  * @Version 1.0
  */
-public class EnumerationIterator<E> implements Iterator<E>, Serializable {
+public class EnumerationIterator<E> implements IterableIterator<E>, Serializable {
     private static final long serialVersionUID = 1L;
 
     /**

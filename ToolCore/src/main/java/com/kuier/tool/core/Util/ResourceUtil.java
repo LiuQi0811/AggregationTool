@@ -86,7 +86,7 @@ public class ResourceUtil {
      * @param classLoader
      * @author LiuQi
      */
-    public static EnumerationIterator getResourceIterator(String resource, ClassLoader classLoader){
+    public static EnumerationIterator<URL> getResourceIterator(String resource, ClassLoader classLoader){
         // 定义资源文件
         Enumeration<URL> resources = null;
         try {
@@ -98,6 +98,6 @@ public class ResourceUtil {
             throw new IORuntimeException(e);
         }
         // 返回枚举迭代器 EnumerationIterator 对象
-        return new EnumerationIterator<>(resources);
+        return new EnumerationIterator<URL>(resources);
     }
 }

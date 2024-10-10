@@ -1,5 +1,8 @@
 package com.kuier.tool.core.Util;
 
+import com.kuier.tool.core.Lang.ClassScanner;
+import com.kuier.tool.core.Lang.Filter;
+
 import java.lang.reflect.Type;
 
 /**
@@ -46,6 +49,17 @@ public class ClassUtil {
     public static ClassLoader getClassLoader() {
         // 返回 获取类加载器
         return ClassLoaderUtil.getClassLoader();
+    }
+
+    /**
+     * scannerPackage 扫描包
+     * @param packageName 包名
+     * @param classFilter 类过滤器
+     * @author LiuQi
+     */
+    public static void scannerPackage(String packageName, Filter<Class<?>> classFilter){
+        // 扫描包
+         ClassScanner.scannerPackage(packageName, classFilter);
     }
 
 }
