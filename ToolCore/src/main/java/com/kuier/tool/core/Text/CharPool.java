@@ -17,4 +17,9 @@ public interface CharPool {
      * 字符常量：反斜杠
      */
     char BACKSLASH = '\\';
+
+    /**
+     * 字符常量：空格符
+     */
+    char SPACE = ' ';
 }

@@ -1,10 +1,12 @@
 package com.kuier.tool.core.Util;
 
 import com.kuier.tool.core.Lang.Assert;
+import com.kuier.tool.core.Net.URLDecoder;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.charset.Charset;
 
 /**
  * @ClassName UrlUtil
@@ -38,6 +40,31 @@ public class UrlUtil extends UrlEncodeUtil {
         } catch (IOException e) {
             throw new RuntimeException();
         }
+    }
+
+
+    /**
+     * decode 解码
+     * @param content 内容 URL 路径信息
+     * @param charset 字符集编码
+     * @return {@link String}
+     * @author LiuQi
+     */
+    public static String decode(String content, String charset){
+        // 字符集编码为空 返回null 否则 返回字符编码处理结果
+        return decode(content, StrUtil.isEmpty(charset) ? null : CharsetUtil.charset(charset));
+    }
+
+    /**
+     * decode 解码
+     * @param content 内容 URL 路径信息
+     * @param charset 编码
+     * @return {@link String}
+     * @author LiuQi
+     */
+    public static String decode(String content, Charset charset){
+        // URL解码 返回解码处理后的结果
+        return URLDecoder.decode(content, charset);
     }
 
 }

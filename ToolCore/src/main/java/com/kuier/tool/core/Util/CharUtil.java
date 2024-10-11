@@ -14,7 +14,8 @@ public class CharUtil implements CharPool {
      * isBlankChar 字符为空处理
      *
      * @param char_
-     * @return
+     * @return {@link boolean}
+     * @author LiuQi
      */
     public static boolean isBlankChar(char char_) {
         // 返回 字符串为空处理
@@ -25,7 +26,8 @@ public class CharUtil implements CharPool {
      * isBlankChar 字符为空处理
      *
      * @param char_
-     * @return
+     * @return {@link boolean}
+     * @author LiuQi
      */
     public static boolean isBlankChar(int char_) {
 
@@ -65,10 +67,33 @@ public class CharUtil implements CharPool {
     /**
      * isFileSeparator 是否为Windows或者Linux（Unix）文件分隔符
      *
-     * @return
+     * @return {@link boolean}
+     * @author LiuQi
      */
     public static boolean isFileSeparator(char char_) {
         //  返回 Windows或者Linux（Unix）文件分隔符匹配结果
         return SLASH == char_ || BACKSLASH == char_;
+    }
+
+    /**
+     * isNumber 是否为数字
+     * @param char_
+     * @return {@link boolean}
+     * @author LiuQi
+     */
+    public static boolean isNumber(char char_){
+        // 返回 字符 大于等于 0 小于等于 9 的结果
+        return char_ >= '0' && char_ <= '9';
+    }
+
+    /**
+     * isHexChar 是否为十六进制字符
+     * @param char_ 字符 0-9 a-f A-F
+     * @return {@link boolean}
+     * @author LiuQi
+     */
+    public static boolean isHexChar(char char_){
+        // 返回 是否为数字 0-9 或 是否为 a-f 小写字母 或 是否为 A-F 大写字母
+        return isNumber(char_) || (char_ >= 'a' && char_ <= 'f') || (char_ >= 'A' && char_ <= 'F');
     }
 }
