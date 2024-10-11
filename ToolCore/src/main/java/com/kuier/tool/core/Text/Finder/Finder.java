@@ -24,4 +24,9 @@ public interface Finder {
      * @author LiuQi
      */
     int end(int index_);
+
+    /**
+     * INDEX_NOT_FOUND 未找到返回-1
+     */
+    int INDEX_NOT_FOUND = -1;
 }

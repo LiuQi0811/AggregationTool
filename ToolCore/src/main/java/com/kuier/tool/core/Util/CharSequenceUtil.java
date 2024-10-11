@@ -1,5 +1,6 @@
 package com.kuier.tool.core.Util;
 
+import com.kuier.tool.core.Text.Finder.Finder;
 import com.kuier.tool.core.Text.StrFormatter;
 import com.kuier.tool.core.Text.StrSplitter;
 
@@ -16,6 +17,10 @@ import java.util.function.Predicate;
  * @Version 1.0
  */
 public class CharSequenceUtil {
+    /**
+     * 未找到返回 -1
+     */
+    public static final int INDEX_NOT_FOUND = Finder.INDEX_NOT_FOUND;
 
     /**
      * 空字符串
@@ -386,6 +391,41 @@ public class CharSequenceUtil {
     }
 
     /**
+     * subBefore 截取分隔字符串之前的字符串，不包括分隔字符串
+     * @param charStr 被查找的字符串
+     * @param separator 分隔字符串（不包括）
+     * @param isLastSeparator 是否查找最后一个分隔字符串（多次出现分隔字符串时选取最后一个），true为选取最后一个
+     * @return {@link String}
+     * @author LiuQi
+     */
+    public static String subBefore(CharSequence charStr,CharSequence separator,boolean isLastSeparator){
+        if(isEmpty(charStr) || null == separator){ // 字符串参数为空 或者 分隔字符串为空
+            // 字符串 为空 返回null 则返回字符串
+            return str(charStr);
+        }
+        // 字符串转字符串处理
+        String charStr_ = charStr.toString();
+        // 分隔字符串转字符串处理
+        String separator_ = separator.toString();
+        if(separator_.isEmpty()){ // 分隔字符串为空
+            // 返回 ""
+            return EMPTY;
+        }
+        // 分隔字符串位置 如果 isLastSeparator 为 true 则 查找最后一个分隔字符串的位置 否则 根据分隔字符串查找位置
+        int position = isLastSeparator ? charStr_.lastIndexOf(separator_) : charStr_.indexOf(separator_);
+        if(INDEX_NOT_FOUND == position){ // 分隔字符串位置 小于0
+            // 返回字符串
+            return charStr_;
+        }
+        if(0 == position){ // 分隔字符串位置 等于0
+            // 返回 ""
+            return EMPTY;
+        }
+        // 截取字符串 从 0 到 分隔字符串位置 返回字符串
+        return charStr_.substring(0,position);
+    }
+
+    /**
      * subSuf 截取指定位置后面的字符串处理
      *
      * @param charStr
@@ -616,5 +656,56 @@ public class CharSequenceUtil {
         }
         // 返回转字符串处理后的结果
         return charStr_;
+    }
+
+    /**
+     * addSuffixIfNot 添加后缀 如果不存在
+     * @param charStr  字符串
+     * @param suffix 后缀
+     * @return {@link String}
+     * @author LiuQi
+     */
+    public static String addSuffixIfNot(CharSequence charStr,CharSequence suffix){
+        // 调用 appendIfMissing 方法添加结尾字符串 不忽略大小写
+        return appendIfMissing(charStr,suffix);
+    }
+
+    /**
+     * appendIfMissing 如果给定字符串不是以给定的一个或多个字符串为结尾，则在尾部添加结尾字符串 不忽略大小写
+     * @param charStr 字符串
+     * @param suffix 后缀
+     * @param suffixes 后缀数组
+     * @return {@link String}
+     * @author LiuQi
+     */
+    public static String appendIfMissing(CharSequence charStr, CharSequence suffix, CharSequence... suffixes){
+        // 返回添加后缀 如果不存在 不忽略大小写
+        return appendIfMissing(charStr,suffix,false,suffixes);
+    }
+
+    /**
+     * appendIfMissing 如果给定字符串不是以给定的一个或多个字符串为结尾，则在尾部添加结尾字符串
+     * @param charStr 字符串
+     * @param suffix 后缀
+     * @param ignoreCase 是否忽略大小写
+     * @param suffixes 后缀数组
+     * @return {@link String}
+     * @author LiuQi
+     */
+    public static String appendIfMissing(CharSequence charStr, CharSequence suffix, boolean ignoreCase, CharSequence... suffixes){
+        if(charStr == null || isEmpty(suffix) || endWith(charStr,suffix,ignoreCase)){ // 字符串参数为空 或者 后缀参数为空 或者 字符串以给定的一个或多个字符串为结尾
+            // 返回转字符串处理后的结果
+            return str(charStr);
+        }
+        if(ArrayUtil.isNotEmpty(suffixes)){ // 后缀数组不为空
+            for (CharSequence suffix_ : suffixes) { // 遍历后缀数组
+                if (endWith(charStr, suffix_, ignoreCase)) { // 字符串以给定的一个或多个字符串为结尾
+                    // 返回转字符串处理后的结果
+                    return charStr.toString();
+                }
+            }
+        }
+        // 返回字符串拼接处理后的结果
+        return charStr.toString().concat(suffix.toString());
     }
 }

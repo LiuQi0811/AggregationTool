@@ -22,4 +22,9 @@ public interface CharPool {
      * 字符常量：空格符
      */
     char SPACE = ' ';
+
+    /**
+     * 字符常量：点
+     */
+    char DOT = '.';
 }

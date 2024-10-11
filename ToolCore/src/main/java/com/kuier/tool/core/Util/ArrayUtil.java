@@ -22,6 +22,19 @@ public class ArrayUtil {
     }
 
     /**
+     * isNotEmpty 数组非空处理
+     *
+     * @param data 数组
+     * @param <T>
+     * @return {@link boolean}
+     * @author LiuQi
+     */
+    public static <T> boolean isNotEmpty(T[] data) {
+        // 返回非空数组
+        return (null != data && data.length != 0);
+    }
+
+    /**
      * isArray 是否是数组类型处理
      *
      * @param data

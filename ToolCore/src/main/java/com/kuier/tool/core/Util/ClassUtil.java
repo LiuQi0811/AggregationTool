@@ -4,6 +4,7 @@ import com.kuier.tool.core.Lang.ClassScanner;
 import com.kuier.tool.core.Lang.Filter;
 
 import java.lang.reflect.Type;
+import java.util.Set;
 
 /**
  * @ClassName ClassUtil
@@ -57,9 +58,9 @@ public class ClassUtil {
      * @param classFilter 类过滤器
      * @author LiuQi
      */
-    public static void scannerPackage(String packageName, Filter<Class<?>> classFilter){
+    public static Set<Class<?>> scannerPackage(String packageName, Filter<Class<?>> classFilter){
         // 扫描包
-         ClassScanner.scannerPackage(packageName, classFilter);
+        return ClassScanner.scannerPackage(packageName, classFilter);
     }
 
 }
